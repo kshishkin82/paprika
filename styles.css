@@ -498,6 +498,16 @@
         display: none;
       }
 
+      header {
+        justify-content: center;
+      }
+
+      .logo {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
       .grid { grid-template-columns: 1fr; }
       .btn { width: 100%; text-align: center; }
       .nav {
