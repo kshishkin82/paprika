@@ -1,0 +1,534 @@
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --ink: #1b1514;
+      --muted: #5f5551;
+      --hot-rgb: 193, 39, 45;
+      --hot: rgb(var(--hot-rgb));
+      --sun: #fff1f2;
+      --mint: #ffe9ec;
+      --card: #ffffff;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Raleway", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      padding: 24px 6vw 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wrap::before {
+      content: "";
+      position: absolute;
+      inset: -93px 0 auto;
+      height: 225px;
+      background: linear-gradient(120deg, rgba(193, 39, 45, 0.2), rgba(255, 255, 255, 0.6));
+      transform: skewY(355deg);
+      z-index: 0;
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+
+    .logo img {
+      width: 140px;
+      height: auto;
+      display: block;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+    }
+
+    .nav .nav-cta {
+      padding: 0 16px;
+      border-radius: 999px;
+      background: var(--hot);
+      color: #fff;
+      text-transform: none;
+      letter-spacing: normal;
+      font-weight: 600;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 28px;
+      align-items: start;
+      margin-top: 52px;
+      margin-bottom: 48px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 198px;
+      left: -160px;
+      width: 220px;
+      height: 220px;
+      background: url("https://paprika-studio.ru/wp-content/uploads/spoon.png") center/contain no-repeat;
+      opacity: 0.8;
+      transform: rotate(38deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -50px;
+      right: -70px;
+      width: 240px;
+      height: 240px;
+      background: url("https://paprika-studio.ru/wp-content/uploads/fork.png") center/contain no-repeat;
+      opacity: 0.22;
+      transform: rotate(16deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: "Merriweather", serif;
+      font-weight: 300;
+      font-size: clamp(51px, 8vw, 52px);
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+
+    .hero h2 {
+      font-family: "Merriweather", serif;
+      font-weight: 300;
+      font-size: clamp(30px, 8vw, 30px);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 0 0 24px;
+      line-height: 1.7;
+    }
+
+    .cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 2px solid var(--hot);
+      color: var(--hot);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 18px rgba(27, 23, 21, 0.18);
+    }
+
+    .btn-cert {
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-hot {
+      background: var(--hot);
+      border-color: var(--hot);
+      color: #fff;
+    }
+
+    .visual {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 18px 40px rgba(27, 23, 21, 0.1);
+      display: grid;
+      gap: 14px;
+    }
+
+    .visual .block {
+      padding: 20px;
+      font-weight: 600;
+      min-height: 136px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .visual .block .title {
+      font-size: 18px;
+    }
+
+    .visual .block .date {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: var(--hot);
+      box-shadow: 0 10px 18px rgba(var(--hot-rgb), 0.28);
+    }
+
+    .visual .block,
+    .grid .tile {
+      border-radius: 16px;
+      color: #fff;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      text-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .visual .block::after,
+    .grid .tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .visual .block::after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6));
+    }
+
+    .visual .block span,
+    .grid .tile span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .block.hot { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/Liguriya-7ac63fceedcd5cf75d6989c93b56535d.jpg"); }
+    .block.sun { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/15021426495988e0b9350dc8.21593861-436dffa77fdff0885275a423fb08a7d7.jpg"); }
+    .block.mint { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/1-b077136b3511a21ec18bf1df99721e05.png"); }
+
+    .block.calendar-link {
+      background-image: linear-gradient(135deg, #c1272d 0%, #e84d5b 45%, #ff7a5c 100%);
+      text-shadow: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .block.calendar-link::after {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.18));
+    }
+
+    .block.calendar-link .date {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .block.calendar-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(var(--hot-rgb), 0.32);
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+
+    .center-block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 14px 28px rgba(27, 23, 21, 0.08);
+    }
+
+    .card.ornament {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card.ornament::after {
+      content: "";
+      position: absolute;
+      top: 229px;
+      right: -30px;
+      width: 209px;
+      height: 160px;
+      background: url(https://paprika-studio.ru/wp-content/uploads/peper.png) center / contain no-repeat;
+      opacity: 0.6;
+      transform: rotate(26deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card.ornament > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card h2 {
+      font-family: "Merriweather", serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 1px;
+      margin: 0 0 12px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid .tile {
+      padding: 14px;
+      font-weight: 600;
+      min-height: 140px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .grid .tile::after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.55));
+    }
+
+    .grid .tile.photo-1 { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/Uzhin-gurmana-e1736949694958-ca1e53226a593a739a66d5b5104cbc06.jpg"); }
+    .grid .tile.photo-2 { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/palermo-e1732105472722-ee3dec5d3adf0cd58ffa6d52e6e3edf4.jpg"); }
+    .grid .tile.photo-3 { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/photo_2024-12-05_14-48-57-55f6ecb1a8bb98df1f23a4fd5206cb53.jpg"); }
+    .grid .tile.photo-4 { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/Liguriya-7ac63fceedcd5cf75d6989c93b56535d.jpg"); }
+    .grid .tile.photo-5 { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/15021426495988e0b9350dc8.21593861-436dffa77fdff0885275a423fb08a7d7.jpg"); }
+    .grid .tile.photo-6 { background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/1-b077136b3511a21ec18bf1df99721e05.png"); }
+
+    .banner {
+      background: var(--hot);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 26px;
+      display: grid;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner::after {
+      content: "";
+      position: absolute;
+      bottom: -40px;
+      right: -55px;
+      width: 198px;
+      height: 210px;
+      background: url(https://paprika-studio.ru/wp-content/uploads/garlic.png) center / contain no-repeat;
+      transform: rotate(-8deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .banner > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-call {
+      margin: 4px 0 0;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .banner-phone {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--hot);
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .cert-image {
+      background: url("https://paprika-studio.ru/wp-content/uploads/cert.png") center/contain no-repeat;
+      min-height: 370px;
+    }
+
+    footer {
+      display: grid;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      border-top: 1px solid rgba(27, 23, 21, 0.15);
+      margin: 48px -6vw 0;
+      padding: 28px 6vw 40px;
+      background: #fff1f2;
+      align-items: start;
+    }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .footer-title {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .footer-left {
+      display: grid;
+      gap: 8px;
+      justify-items: start;
+      align-content: start;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(193, 39, 45, 0.3);
+      color: var(--hot);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+    }
+
+    .footer-menu {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .footer-menu .footer-menu-cta {
+      width: fit-content;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--hot);
+      color: #fff;
+      text-transform: none;
+      letter-spacing: normal;
+      font-weight: 600;
+    }
+
+    .footer-right {
+      display: grid;
+      gap: 12px;
+      justify-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .section {
+        grid-template-columns: 1fr;
+      }
+
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .hero::before,
+      .hero::after,
+      .card.ornament::after,
+      .banner::after {
+        display: none;
+      }
+
+      .grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; text-align: center; }
+      .nav {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav a {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      .nav .nav-cta {
+        width: 100%;
+        height: 44px;
+        justify-content: center;
+        font-size: 15px;
+        font-weight: 700;
+        box-shadow: 0 10px 18px rgba(193, 39, 45, 0.3);
+      }
+      .banner {
+        padding: 18px;
+        gap: 8px;
+      }
+      .cert-image {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+      }
+      .banner-call {
+        font-size: 17px;
+        font-weight: 600;
+      }
+    }
