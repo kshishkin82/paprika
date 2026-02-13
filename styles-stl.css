@@ -131,17 +131,17 @@
     }
 
     .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -50px;
-      right: -70px;
-      width: 240px;
-      height: 240px;
-      background: url("https://paprika-studio.ru/wp-content/uploads/fork.png") center/contain no-repeat;
-      opacity: 0.22;
-      transform: rotate(16deg);
-      pointer-events: none;
-      z-index: 0;
+        content: "";
+        position: absolute;
+        bottom: -63px;
+        right: -105px;
+        width: 197px;
+        height: 255px;
+        background: url(https://paprika-studio.ru/wp-content/uploads/garlic.png) center / contain no-repeat;
+        opacity: 1;
+        transform: rotate(34deg);
+        pointer-events: none;
+        z-index: 0;
     }
 
     .hero > * {
@@ -324,17 +324,17 @@
     }
 
     .card.ornament::after {
-      content: "";
-      position: absolute;
-      top: 229px;
-      right: -30px;
-      width: 209px;
-      height: 160px;
-      background: url(https://paprika-studio.ru/wp-content/uploads/peper.png) center / contain no-repeat;
-      opacity: 0.6;
-      transform: rotate(26deg);
-      pointer-events: none;
-      z-index: 0;
+        content: "";
+        position: absolute;
+        top: 135px;
+        right: -30px;
+        width: 194px;
+        height: 208px;
+        background: url(https://paprika-studio.ru/wp-content/uploads/mitten.png) center / contain no-repeat;
+        opacity: 0.9;
+        transform: rotate(291deg);
+        pointer-events: none;
+        z-index: 0;
     }
 
     .card.ornament > * {
@@ -394,16 +394,16 @@
     }
 
     .banner::after {
-      content: "";
-      position: absolute;
-      bottom: -40px;
-      right: -55px;
-      width: 198px;
-      height: 210px;
-      background: url(https://paprika-studio.ru/wp-content/uploads/garlic.png) center / contain no-repeat;
-      transform: rotate(-8deg);
-      pointer-events: none;
-      z-index: 0;
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        right: -94px;
+        width: 307px;
+        height: 278px;
+        background: url(https://paprika-studio.ru/wp-content/uploads/peper.png) center / contain no-repeat;
+        transform: rotate(48deg);
+        pointer-events: none;
+        z-index: 0;
     }
 
     .banner > * {
