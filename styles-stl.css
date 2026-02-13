@@ -77,22 +77,33 @@
       color: rgba(255, 255, 255, 0.8);
     }
 
-    .nav a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 40px;
-    }
+	    .nav a {
+	      display: inline-flex;
+	      align-items: center;
+	      justify-content: center;
+	      height: 40px;
+	      padding: 0 12px;
+	      border-radius: 999px;
+	      background: rgba(255, 255, 255, 0.06);
+	      border: 1px solid rgba(255, 255, 255, 0.12);
+	      transition: background-color 0.2s ease, border-color 0.2s ease;
+	    }
 
-    .nav .nav-cta {
-      padding: 0 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(var(--hot-rgb), 1), rgba(var(--hot-rgb), 0.85));
-      color: #fff;
-      text-transform: none;
-      letter-spacing: normal;
-      font-weight: 600;
-    }
+	    .nav a:hover {
+	      background: rgba(255, 255, 255, 0.09);
+	      border-color: rgba(255, 255, 255, 0.18);
+	    }
+
+	    .nav .nav-cta {
+	      padding: 0 16px;
+	      border-radius: 999px;
+	      background: linear-gradient(135deg, rgba(var(--hot-rgb), 1), rgba(var(--hot-rgb), 0.85));
+	      color: #fff;
+	      border-color: transparent;
+	      text-transform: none;
+	      letter-spacing: normal;
+	      font-weight: 600;
+	    }
 
     .hero {
       position: relative;
