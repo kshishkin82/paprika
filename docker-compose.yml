@@ -22,6 +22,12 @@ services:
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG', true);
+        define('WP_ENVIRONMENT_TYPE', 'local');
+        define('PAPRIKA_TG_BOT_TOKEN', 'PAPRIKA_TG_BOT_TOKEN');
+        define('PAPRIKA_TG_CHAT_ID', 'PAPRIKA_TG_CHAT_ID');
+
     volumes:
       - ./wp-content:/var/www/html/wp-content
     depends_on:

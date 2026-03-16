@@ -4,7 +4,19 @@ declare(strict_types=1);
 
 require get_theme_file_path('includes/header.php');
 ?>
+    <style>
+        .center-header {
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+        }
 
+        .center-header .request-link {
+          align-self: center;
+          width: fit-content;
+          margin-top:4px;
+          }
+    </style>
     <main class="page-content">
       <?php
 
@@ -12,7 +24,29 @@ require get_theme_file_path('includes/header.php');
 
         while (have_posts()) {
           the_post();
-          echo '<h1>' . esc_html(get_the_title()) . '</h1>';
+          if (is_single()) {
+          $nearest_date = pods_field_display("nearest_date");
+          if ($nearest_date) $nearest_date = " ".$nearest_date;
+          ?>
+
+            <div class="center-header">
+             <h1>
+              <?=esc_html(get_the_title()) ?>
+              </h1>
+            <a class="request-link" href="/request/?course=<?=get_the_title().$nearest_date ?>">
+              Записаться
+            </a>
+        </div>
+
+
+          <?php
+          } else {
+          ?>
+             <h1>
+                        <?=esc_html(get_the_title()) ?>
+                        </h1>
+
+          <?php }
           the_content();
         }
       }

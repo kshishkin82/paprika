@@ -1,0 +1,38 @@
+:root {
+    color-scheme: dark;
+    --bg: #0b0b0b;
+    --ink: #f7f2eb;
+    --muted: #cbbfb4;
+    --hot-rgb: 215, 52, 44;
+    --hot: rgb(var(--hot-rgb));
+    --sun: #101010;
+    --mint: #101010;
+    --card: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --chalk: rgba(255, 255, 255, 0.75);
+    --teal: #39b3b1;
+    --radius: 20px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Raleway", system-ui, sans-serif;
+    background: radial-gradient(1200px 480px at 16% 0%, rgba(var(--hot-rgb), 0.18), rgba(0, 0, 0, 0) 60%),
+    radial-gradient(900px 520px at 92% 10%, rgba(57, 179, 177, 0.18), rgba(0, 0, 0, 0) 55%),
+    var(--bg);
+    color: var(--ink);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.text-link {
+    color: var(--hot);
+    text-decoration: underline;
+}

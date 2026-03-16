@@ -2,17 +2,17 @@
 /**
  * Plugin Name: Database Manager - WP Adminer
  * Description: Manage the database from your WordPress Dashboard using Adminer.
- * Version: 4.3.2
- * Stable tag: 4.3.2
- * Adminer version: 5.4.1
+ * Version: 4.3.3
+ * Stable tag: 4.3.3
+ * Adminer version: 5.4.2
  * Author: Pexle Chris
  * Author URI: https://www.pexlechris.dev
  * Contributors: pexlechris
  * Domain Path: /languages
  * Requires at least: 4.7.0
- * Tested up to: 6.9
+ * Tested up to: 6.9.4
  * Requires PHP: 7.0
- * Tested up to PHP: 8.3
+ * Tested up to PHP: 8.4
  * License: GPLv2
  */
 
@@ -353,7 +353,7 @@ function pexlechris_adminer_admin_bar_dropdown_items()
 
     if($is_hpos_enabled){
 
-		$hpos_order_id = ($_GET['page'] ?? null) === 'wc-orders'
+		$hpos_order_id = isset( $_GET['page'] ) && $_GET['page'] === 'wc-orders' && isset( $_GET['id'] )
             ? $_GET['id']
             : null;
 

@@ -12,26 +12,32 @@ require get_theme_file_path('includes/header.php');
         <p>Паприка - первая кулинарная школа Волгограда. Мы проводим обучение поваров и кондитеров, научим как любителей так и профессионалов.</p>
         <h2>Готовить с нами легко!!!</h2>
         <div class="cta">
-          <a class="btn btn-hot" href="#schedule">Записаться</a>
+          <a class="btn btn-hot" href="/request/">Записаться</a>
           <a class="btn" href="#cert">Сертификат</a>
         </div>
       </div>
       <div class="visual" id="schedule">
-        <div class="block hot">
-          <span class="title">Лигурия: паста и морепродукты</span>
-          <span class="date">Ближайшая дата: 5 Февраля (Четверг)</span>
-        </div>
-        <div class="block sun">
-          <span class="title">Лучший ужин в моей жизни</span>
-          <span class="date">Ближайшая дата: уточняется</span>
-        </div>
-        <div class="block mint">
-          <span class="title">Корпоративные мероприятия</span>
-          <span class="date">Ближайшая дата: 5 Февраля (Среда)</span>
-        </div>
-        <a class="block calendar-link" href="<?php echo esc_url(home_url('/calendar')); ?>">
+          <?php
+          $params = array(
+              'where'   => 'showindex.meta_value = 1',
+              'limit'   => 3,
+              'orderby' => 'post_date DESC'
+          );
+          $mypods = pods( 'post', $params );
+          while ( $mypods->fetch() ) {
+          $link  = get_permalink( $mypods->id() );
+          ?>
+            <a class="block" style="background-image:url(<?=$mypods->display('heroimage._src.medium') ?>)" href="<?=$link ?>">
+                <span class="title"><?=$mypods->display( 'post_title' ) ?></span>
+                <span class="date"><?=$mypods->display('nearest_date') ?></span>
+            </a>
+          <?php
+          }
+          ?>
+
+        <a class="block calendar-link" href="/raspisanie/">
           <span class="title">Все мастер классы смотрите в нашем календаре</span>
-          <span class="date">Открыть</span>
+           <span class="date">Открыть</span>
         </a>
       </div>
     </section>

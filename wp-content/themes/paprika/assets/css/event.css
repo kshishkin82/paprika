@@ -1,0 +1,47 @@
+.master-class-card {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  column-gap: 16px;
+  margin-bottom: 16px;
+}
+
+.master-class-card .hero-text p {
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.master-class-card .hero-text .nearest-date {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(var(--hot-rgb), 0.95);
+  box-shadow: 0 10px 18px rgba(var(--hot-rgb), 0.28);
+}
+
+.master-class-card .hero-text ul {
+  padding: 0 1rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.7;
+}
+
+.master-class-card .hero-text .accent {
+  color: var(--hot);
+  font-weight: bold;
+}
+
+.master-class-card .hero-image {
+  max-width: 500px;
+}
+
+.master-class-card .hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
