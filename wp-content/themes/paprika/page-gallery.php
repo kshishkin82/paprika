@@ -22,7 +22,7 @@ require get_theme_file_path('includes/header.php');
       $posts_query->the_post();
 
       $post_id = get_the_ID();
-      $image_value = pods_field_display("heroimage._src.medium");
+      $image_value = pods_field_display("heroimage._src.medium_large");
       $title = get_the_title();
       $style_attr = '';
       $image_url = is_string($image_value) ? trim($image_value) : '';
@@ -39,6 +39,7 @@ require get_theme_file_path('includes/header.php');
     </article>
     <?php
     }
+    wp_reset_postdata()
   ?>
   </section>
 </main>

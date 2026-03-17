@@ -24,7 +24,7 @@ require get_theme_file_path('includes/header.php');
       $posts_query->the_post();
 
       $post_id = get_the_ID();
-      $image_value = pods_field_display("heroimage._src.medium");
+      $image_value = pods_field_display("heroimage._src.medium_large");
       $title = get_the_title();
       $nearest_date = pods_field_display("nearest_date");
       $style_attr = '';

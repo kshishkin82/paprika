@@ -137,6 +137,38 @@ function paprika_normalize_ru_mobile_phone(string $raw_phone): string {
   return sprintf('+7 (%s) %s-%s-%s', substr($digits, 1, 3), substr($digits, 4, 3), substr($digits, 7, 2), substr($digits, 9, 2));
 }
 
+function formatEventDate($date): string {
+  if (!$date instanceof DateTimeInterface) {
+    return '';
+  }
+
+  $fmtDate = new IntlDateFormatter(
+    'ru_RU',
+    IntlDateFormatter::NONE,
+    IntlDateFormatter::NONE,
+    $date->getTimezone()->getName(),
+    IntlDateFormatter::GREGORIAN,
+    'd MMMM'
+  );
+
+  $fmtWeekday = new IntlDateFormatter(
+    'ru_RU',
+    IntlDateFormatter::NONE,
+    IntlDateFormatter::NONE,
+    $date->getTimezone()->getName(),
+    IntlDateFormatter::GREGORIAN,
+    'EE'
+  );
+
+  $result = $fmtDate->format($date) . ' (' . mb_strtoupper($fmtWeekday->format($date), 'UTF-8') . ')';
+
+  if ($date->format('H:i') !== '00:00') {
+    $result .= ' [в ' . $date->format('H:i') . ']';
+  }
+
+  return $result;
+}
+
 function paprika_handle_request_form_submit(): void {
   if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     wp_safe_redirect(home_url('/request'));

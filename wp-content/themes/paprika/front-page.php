@@ -7,10 +7,7 @@ require get_theme_file_path('includes/header.php');
 
     <section class="hero">
       <div>
-        <h1>Приглашаем Вас в нашу в кулинарную студию</h1>
-        <p>Программа мастер-классов интересна и новичкам, и опытным кулинарам. Здесь можно получить навыки приготовления разнообразных блюд, почерпнуть интересные идеи для кулинарных экспериментов, узнать новые оригинальные рецепты и зарядиться вдохновением для создания собственных гастрономических шедевров.</p>
-        <p>Паприка - первая кулинарная школа Волгограда. Мы проводим обучение поваров и кондитеров, научим как любителей так и профессионалов.</p>
-        <h2>Готовить с нами легко!!!</h2>
+        <?php the_content() ?>
         <div class="cta">
           <a class="btn btn-hot" href="/request/">Записаться</a>
           <a class="btn" href="#cert">Сертификат</a>
@@ -27,7 +24,7 @@ require get_theme_file_path('includes/header.php');
           while ( $mypods->fetch() ) {
           $link  = get_permalink( $mypods->id() );
           ?>
-            <a class="block" style="background-image:url(<?=$mypods->display('heroimage._src.medium') ?>)" href="<?=$link ?>">
+            <a class="block" style="background-image:url(<?=$mypods->display('heroimage._src.medium_large') ?>)" href="<?=$link ?>">
                 <span class="title"><?=$mypods->display( 'post_title' ) ?></span>
                 <span class="date"><?=$mypods->display('nearest_date') ?></span>
             </a>
@@ -69,12 +66,25 @@ require get_theme_file_path('includes/header.php');
         <p>Детали, подача, эмоции гостей и работа шефа. Здесь вкус выглядит так же ярко, как ощущается.</p>
       </div>
       <div class="grid">
-        <div class="tile photo-1"><span>Гурманские вечера</span></div>
-        <div class="tile photo-2"><span>Командные форматы</span></div>
-        <div class="tile photo-3"><span>Школа со вкусом</span></div>
-        <div class="tile photo-4"><span>Сладкий стол</span></div>
-        <div class="tile photo-5"><span>Сезонные блюда</span></div>
-        <div class="tile photo-6"><span>Детские праздники</span></div>
+          <?php
+          $category = get_term_by('name', 'Галерея', 'category');
+          $posts_query = new WP_Query([
+              'cat' => (int) $category->term_id,
+              'post_type' => 'post',
+              'post_status' => 'publish',
+              'posts_per_page' => 6,
+              'ignore_sticky_posts' => true,
+            ]);
+
+          while ($posts_query->have_posts()) {
+            $posts_query->the_post();
+            $image_value = pods_field_display("heroimage._src.medium_large");
+          ?>
+
+          <div class="tile" style="background-image:url('<?=esc_url($image_value) ?>')"><span><?=the_title() ?></span></div>
+        <?php }
+          wp_reset_postdata();
+        ?>        
       </div>
     </section>
 

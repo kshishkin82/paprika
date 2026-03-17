@@ -36,6 +36,8 @@ services:
       PAPRIKA_TG_CHAT_ID: "160078085"
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_DEBUG', true);
+        define('WP_DEBUG_LOG', true );
+        define('WP_DEBUG_DISPLAY', true );
         define('WP_ENVIRONMENT_TYPE', 'local');
         define('PAPRIKA_TG_BOT_TOKEN', '8762636838:AAFmye2iyme6GtMnm8wDbWhGeDORy5GwmF4');
         define('PAPRIKA_TG_CHAT_ID', '160078085');
