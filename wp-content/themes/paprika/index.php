@@ -31,28 +31,20 @@ require get_theme_file_path('includes/header.php');
           
           ?>
 
-            <div class="center-header">
-             <h1>
-              <?=esc_html(get_the_title()) ?>
-              </h1>
-              <?php 
-                if (is_single() && $category_name == 'Мастер класс') {
-                $nearest_date = pods_field_display("nearest_date");
-                  if ($nearest_date) $nearest_date = " ".$nearest_date;
-              ?>
-                  <a class="request-link" href="/request/?course=<?=get_the_title().$nearest_date ?>">Записаться</a>
+          <div class="center-header">
+            <h1><?=esc_html(get_the_title()) ?></h1>
+            <?php 
+              if (is_single() && $category_name == 'Мастер класс') {
+              $nearest_date = pods_field_display("nearest_date");
+                if ($nearest_date) $nearest_date = " ".$nearest_date;
+            ?>
+            <a class="request-link" href="/request/?course=<?=get_the_title().$nearest_date ?>">Записаться</a>
+            <?php } ?>
         </div>
+        <?php
 
-
-          <?php
-          } else {
-          ?>
-             <h1>
-                        <?=esc_html(get_the_title()) ?>
-                        </h1>
-
-          <?php }
-          the_content();
+        the_content();
+        
         }
       }
       ?>
