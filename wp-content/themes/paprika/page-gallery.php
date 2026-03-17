@@ -33,10 +33,7 @@ require get_theme_file_path('includes/header.php');
     <article class="event-block"<?php echo $style_attr; ?>>
       <a class="event-block__link" href="<?php echo esc_url(get_permalink()); ?>">
         <div class="event-block__content">
-          <h2 class="event-block__title"><?php echo esc_html($title); ?></h2>
-          <?php if (is_string($nearest_date) && trim($nearest_date) !== '') { ?>
-            <p class="nearest-date"><?php echo esc_html($nearest_date); ?></p>
-          <?php } ?>
+          <h2 class="event-block__title"><?php echo esc_html($title); ?></h2>          
         </div>
       </a>
     </article>

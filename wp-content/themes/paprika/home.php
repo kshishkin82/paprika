@@ -6,7 +6,9 @@ require get_theme_file_path('includes/header.php');
 ?>
 
 <main class="page-content">
-<section class="event-grid">
+<h1>Расписание мастер классов</h1>
+
+<section class="event-grid" style="padding-top:20px">
   <?php
   // if (have_posts()) {
     $category = get_term_by('name', 'Мастер класс', 'category');
@@ -44,9 +46,6 @@ require get_theme_file_path('includes/header.php');
     </article>
     <?php
     }
-  // } else {
-  //   echo '<p>Посты не найдены.</p>';
-  // }
   ?>
   </section>
 </main>
