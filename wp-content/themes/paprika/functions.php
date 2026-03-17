@@ -188,6 +188,7 @@ function paprika_handle_request_form_submit(): void {
 
   $token = paprika_request_get_telegram_token();
   $chat_id = paprika_request_get_telegram_chat_id();
+
   if ($token === '' || $chat_id === '') {
     wp_safe_redirect(paprika_request_redirect_url('config_error', $redirect_base));
     exit;
