@@ -25,21 +25,22 @@ require get_theme_file_path('includes/header.php');
         while (have_posts()) {
 
           $categories = get_the_category(); 
-          echo $category_name = $categories[0]->name;
+          $category_name = $categories[0]->name;
 
           the_post();
-          if (is_single()) {
-          $nearest_date = pods_field_display("nearest_date");
-          if ($nearest_date) $nearest_date = " ".$nearest_date;
+          
           ?>
 
             <div class="center-header">
              <h1>
               <?=esc_html(get_the_title()) ?>
               </h1>
-            <a class="request-link" href="/request/?course=<?=get_the_title().$nearest_date ?>">
-              Записаться
-            </a>
+              <?php 
+                if (is_single() && $category_name == 'Мастер класс') {
+                $nearest_date = pods_field_display("nearest_date");
+                  if ($nearest_date) $nearest_date = " ".$nearest_date;
+              ?>
+                  <a class="request-link" href="/request/?course=<?=get_the_title().$nearest_date ?>">Записаться</a>
         </div>
 
 
