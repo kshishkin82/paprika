@@ -8,10 +8,19 @@ require get_theme_file_path('includes/header.php');
 <main class="page-content">
 <section class="event-grid">
   <?php
-  if (have_posts()) {
+  // if (have_posts()) {
+    $category = get_term_by('name', 'Мастер класс', 'category');
 
-    while (have_posts()) {
-      the_post();
+    $posts_query = new WP_Query([
+        'cat' => (int) $gallery_category->term_id,
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'ignore_sticky_posts' => true,
+      ]);
+
+    while ($posts_query->have_posts()) {
+      $gallery_query->the_post();
 
       $post_id = get_the_ID();
       $image_value = pods_field_display("heroimage._src.medium");
@@ -36,9 +45,9 @@ require get_theme_file_path('includes/header.php');
     </article>
     <?php
     }
-  } else {
-    echo '<p>Посты не найдены.</p>';
-  }
+  // } else {
+  //   echo '<p>Посты не найдены.</p>';
+  // }
   ?>
   </section>
 </main>
