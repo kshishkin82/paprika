@@ -9,7 +9,7 @@ services:
       MARIADB_PASSWORD: wordpress
       MARIADB_ROOT_PASSWORD: root
     volumes:
-      - db_data:/var/lib/mysql
+      - ./marinadb:/var/lib/mysql
 
   wordpress:
     image: wordpress:php8.2-apache
@@ -33,5 +33,3 @@ services:
     depends_on:
       - db
 
-volumes:
-  db_data:
