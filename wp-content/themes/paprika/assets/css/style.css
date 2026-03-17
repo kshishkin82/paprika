@@ -701,6 +701,14 @@ footer {
         max-width: 100%;
     }
 
+    .page-content--request .card--request-form {
+        order: 2;
+    }
+
+    .page-content--request .card--request-text {
+        order: 1;
+    }
+
     .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }

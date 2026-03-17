@@ -27,10 +27,10 @@ if ($selected_course !== '') {
   $request_page_url = add_query_arg('course', $selected_course, $request_page_url);
 }
 ?>
-<main class="page-content">
+<main class="page-content page-content--request">
     <h1>Оставить заявку</h1>
   <section class="section">
-    <div class="card">
+    <div class="card card--request-form">
       <?php if (isset($status_map[$request_status])) { ?>
         <div class="request-notice request-notice--<?php echo esc_attr($status_map[$request_status]['type']); ?>">
           <?php echo esc_html($status_map[$request_status]['text']); ?>
@@ -77,21 +77,27 @@ if ($selected_course !== '') {
       </form>
     </div>
 
-    <div class="card">
-      <?php if ($selected_course !== '') { ?>
-        <h1>Запись на мастер-класс <?php echo esc_html($selected_course); ?></h1>
-
-        <p class="request-motivation">
-          Отличный выбор. Оставьте контакты, и мы свяжемся с вами, чтобы подтвердить участие
-          и уточнить детали по выбранному мастер-классу.
-        </p>
-
-      <?php } else { ?>
-        <h1>Оставьте заявку на мастер-класс</h1>
+    <div class="card card--request-text">
+      <?php if ($selected_course === '') { ?>
+       <h1>Оставьте заявку на мастер-класс</h1>
         <p class="request-motivation">
           Сделайте первый шаг к новым вкусам и ярким впечатлениям. Мы свяжемся с вами,
           подберем удобный формат и поможем выбрать ближайшее занятие именно для вас.
         </p>
+      <?php } ?>
+        <?php  if ($selected_course !== '') { ?>
+          <?php if ($selected_course === 'Сертификат') { ?>
+            <h1>Подарочный Сертификат</h1>
+            <p class="request-motivation">
+              Почти готово! Оставьте ваши контакты — мы свяжемся с вами, чтобы подтвердить заказ и отправить сертификат будущему шефу
+            </p>
+          <?php } else { ?>
+            <h1>Запись на мастер-класс <?php echo esc_html($selected_course); ?></h1>       
+            <p class="request-motivation">
+              Отличный выбор. Оставьте контакты, и мы свяжемся с вами, чтобы подтвердить участие
+              и уточнить детали по выбранному мастер-классу.
+            </p>
+      <?php } ?>            
       <?php } ?>
     </div>
   </section>
