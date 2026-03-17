@@ -20,7 +20,7 @@ require get_theme_file_path('includes/header.php');
       ]);
 
     while ($posts_query->have_posts()) {
-      $gallery_query->the_post();
+      $posts_query->the_post();
 
       $post_id = get_the_ID();
       $image_value = pods_field_display("heroimage._src.medium");
