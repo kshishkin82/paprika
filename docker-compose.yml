@@ -21,6 +21,7 @@ services:
       MARIADB_ROOT_PASSWORD: root
     volumes:
       - ./marinadb:/var/lib/mysql
+      - ./db:/tmp/dump
 
   wordpress:
     image: wordpress:php8.2-apache
@@ -31,12 +32,13 @@ services:
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
+      PAPRIKA_TG_BOT_TOKEN: "8762636838:AAFmye2iyme6GtMnm8wDbWhGeDORy5GwmF4"
+      PAPRIKA_TG_CHAT_ID: "160078085"
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_DEBUG', true);
         define('WP_ENVIRONMENT_TYPE', 'local');
-        define('PAPRIKA_TG_BOT_TOKEN', 'PAPRIKA_TG_BOT_TOKEN');
-        define('PAPRIKA_TG_CHAT_ID', 'PAPRIKA_TG_CHAT_ID');
-
+        define('PAPRIKA_TG_BOT_TOKEN', '8762636838:AAFmye2iyme6GtMnm8wDbWhGeDORy5GwmF4');
+        define('PAPRIKA_TG_CHAT_ID', '160078085');
     volumes:
       - ./wp-content:/var/www/html/wp-content
     depends_on:
