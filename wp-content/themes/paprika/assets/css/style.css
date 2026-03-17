@@ -5,6 +5,22 @@
 @import url("./request.css");
 
 
+.page-content .prefer-image img {
+transform:
+    perspective(750px)
+    translate3d(0px, 0px, -250px)
+    rotateX(27deg)
+    rotateY(-16deg)
+    scale(0.9, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 70px 40px -20px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease-in-out transform;
+}
+
+.page-content .prefer-image img:hover {
+transform: translate3d(0px, 0px, -250px);
+}
+
 .page-content a {
     color: var(--hot);
     text-decoration: underline;
