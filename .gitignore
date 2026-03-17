@@ -2,3 +2,5 @@
 .DS_Store
 scripts/files
 wp-content/uploads
+marinadb
+db
