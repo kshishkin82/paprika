@@ -23,6 +23,10 @@ require get_theme_file_path('includes/header.php');
       if (have_posts()) {
 
         while (have_posts()) {
+
+          $categories = get_the_category(); 
+          echo $category_name = $categories[0]->name;
+
           the_post();
           if (is_single()) {
           $nearest_date = pods_field_display("nearest_date");
