@@ -129,15 +129,21 @@ function paprika_is_schedule_context(): bool {
 function paprika_mark_active_main_menu_items(array $classes, WP_Post $menu_item): array {
   $item_path = wp_parse_url((string) $menu_item->url, PHP_URL_PATH);
   $item_path = is_string($item_path) ? trailingslashit($item_path) : '';
-  $is_gallery_item = (bool) preg_match('#/fotogalereya/$#', $item_path);
-  $is_schedule_item = (bool) preg_match('#/raspisanie/$#', $item_path);
+  $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
+  $current_path = (string) wp_parse_url($request_uri, PHP_URL_PATH);
+  $current_path = trailingslashit($current_path);
 
-  if ($is_gallery_item && paprika_is_gallery_context()) {
+  $is_gallery_item = str_contains($item_path, '/fotogalereya/');
+  $is_schedule_item = str_contains($item_path, '/raspisanie/');
+  $is_gallery_current = str_contains($current_path, '/fotogalereya/');
+  $is_schedule_current = str_contains($current_path, '/raspisanie/');
+
+  if ($is_gallery_item && ($is_gallery_current || paprika_is_gallery_context())) {
     $classes[] = 'current-menu-item';
     $classes[] = 'current_page_item';
   }
 
-  if ($is_schedule_item && paprika_is_schedule_context()) {
+  if ($is_schedule_item && ($is_schedule_current || paprika_is_schedule_context())) {
     $classes[] = 'current-menu-item';
     $classes[] = 'current_page_item';
   }
