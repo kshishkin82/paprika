@@ -150,7 +150,23 @@ function paprika_mark_active_main_menu_items(array $classes, WP_Post $menu_item)
 
   return array_values(array_unique($classes));
 }
-add_filter('nav_menu_css_class', 'paprika_mark_active_main_menu_items', 10, 2);
+
+function paprika_mark_active_main_menu_objects(array $items, stdClass $args): array {
+  if (!isset($args->theme_location) || $args->theme_location !== 'main-menu') {
+    return $items;
+  }
+
+  foreach ($items as $item) {
+    if (!$item instanceof WP_Post) {
+      continue;
+    }
+
+    $item->classes = paprika_mark_active_main_menu_items((array) $item->classes, $item);
+  }
+
+  return $items;
+}
+add_filter('wp_nav_menu_objects', 'paprika_mark_active_main_menu_objects', 10, 2);
 
 final class Paprika_Link_Only_Walker extends Walker_Nav_Menu {
   public function start_lvl(&$output, $depth = 0, $args = null): void {
