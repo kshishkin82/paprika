@@ -36,11 +36,11 @@
   gap: 14px;
 }
 
-.reviews-slider .review-card:nth-child(-n+3) {
+.reviews-slider:not(.is-ready) .review-card:nth-child(-n+3) {
   display: grid;
 }
 
-.reviews-slider .review-card:nth-child(n+4) {
+.reviews-slider:not(.is-ready) .review-card:nth-child(n+4) {
   display: none;
 }
 
@@ -145,11 +145,11 @@
     grid-template-columns: 1fr;
   }
 
-  .reviews-slider .review-card:nth-child(-n+1) {
+  .reviews-slider:not(.is-ready) .review-card:nth-child(-n+1) {
     display: grid;
   }
 
-  .reviews-slider .review-card:nth-child(n+2) {
+  .reviews-slider:not(.is-ready) .review-card:nth-child(n+2) {
     display: none;
   }
 
