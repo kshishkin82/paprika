@@ -225,7 +225,7 @@ header a:hover {
 .nav a.current-menu-ancestor,
 .nav a.current-menu-parent {
     
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgb(211 51 44 / 43%);
     color: #fff;
     background-size: 100% 100%;
     background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
