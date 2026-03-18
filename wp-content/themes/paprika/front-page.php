@@ -65,7 +65,7 @@ require get_theme_file_path('includes/header.php');
       <div class="card">
         <h2>Фотогалерея</h2>
         <p>Детали, подача, эмоции гостей и работа шефа. Здесь вкус выглядит так же ярко, как ощущается.</p>
-        <a class="btn" href="/fotogalereya/">Посмотреть все фото</a>
+        <a class="btn" style="display: inline-block; margin-top: 9px;" href="/fotogalereya/">Посмотреть все фото</a>
       </div>
       <div class="grid">
           <?php
