@@ -224,9 +224,11 @@ header a:hover {
 .nav a.current_page_item,
 .nav a.current-menu-ancestor,
 .nav a.current-menu-parent {
-    background: rgba(var(--hot-rgb), 0.95);
-    border-color: rgba(var(--hot-rgb), 1);
+    border: none;
     color: #fff;
+    background-size: 100% 100%;
+    background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+    background-image: radial-gradient(113% 91% at 17% -2%, #D7342C 1%, #FF000000 99%), radial-gradient(142% 91% at 111% 84%, #000000FF 0%, #000000FF 100%);
 }
 
 .nav .nav-cta {

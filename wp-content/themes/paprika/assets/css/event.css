@@ -42,6 +42,7 @@
 
 .master-class-card .hero-image img {
   width: 100%;
+  max-width: 400px;
   height: auto;
   border-radius: var(--radius);
 }
