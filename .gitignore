@@ -1,6 +1,10 @@
 .idea/
 .DS_Store
+__pycache__
+*.pyc
 scripts/files
 wp-content/uploads
 marinadb
 db
+scripts/files
+sc

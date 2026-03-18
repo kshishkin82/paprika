@@ -1,0 +1,50 @@
+from download_by_selector import download_by_selector
+
+links = [
+    "https://paprika-studio.ru/fotogalereya/uzhin-gurmana-2/",
+    "https://paprika-studio.ru/fotogalereya/palermo/",
+    "https://paprika-studio.ru/fotogalereya/meat-club-2/",
+    "https://paprika-studio.ru/fotogalereya/marrakesh-2/",
+    "https://paprika-studio.ru/fotogalereya/aziya-gurme-2/",
+    "https://paprika-studio.ru/fotogalereya/gruziya-chast-iii-3/",
+    "https://paprika-studio.ru/fotogalereya/gurme-2/",
+    "https://paprika-studio.ru/fotogalereya/skandinavskaya-kuhnya-2/",
+    "https://paprika-studio.ru/fotogalereya/rimskie-kanikuly-2/",
+    "https://paprika-studio.ru/fotogalereya/liguriya-2/",
+    "https://paprika-studio.ru/fotogalereya/vecher-v-marsele/",
+    "https://paprika-studio.ru/fotogalereya/yapona-papa-2/",
+    "https://paprika-studio.ru/fotogalereya/italyano-2/",
+    "https://paprika-studio.ru/fotogalereya/gastrouzhin-6/",
+    "https://paprika-studio.ru/fotogalereya/franczuzskij-poczeluj-2/",
+    "https://paprika-studio.ru/fotogalereya/gurman-chast-ii/",
+    "https://paprika-studio.ru/fotogalereya/semejnyj-uzhin-2/",
+    "https://paprika-studio.ru/fotogalereya/vysshij-klass-2/",
+    "https://paprika-studio.ru/fotogalereya/viva-la-pizza-2/",
+    "https://paprika-studio.ru/fotogalereya/malenkaya-gruziya-chast-ii-2/",
+    "https://paprika-studio.ru/fotogalereya/novaya-italiya-3/",
+    "https://paprika-studio.ru/fotogalereya/avstro-vengriya-2/",
+    "https://paprika-studio.ru/fotogalereya/bon-appetit-sekrety-franczuzskoj-kuhni/",
+    "https://paprika-studio.ru/fotogalereya/ryba-3/",
+    "https://paprika-studio.ru/fotogalereya/luchshij-uzhin-v-moej-zhizni-2/",
+    "https://paprika-studio.ru/fotogalereya/druzhba-narodov-3/",
+    "https://paprika-studio.ru/fotogalereya/novaya-italiya-3-2/",
+    "https://paprika-studio.ru/fotogalereya/italiya-v-luchshih-tradicziyah-2/",
+    "https://paprika-studio.ru/fotogalereya/gurman-3/",
+    "https://paprika-studio.ru/fotogalereya/ya_lyublyu_borshh-russkaya-kuhnya/",
+    "https://paprika-studio.ru/fotogalereya/myasnoy-pir/",
+    "https://paprika-studio.ru/fotogalereya/bavariya/",
+    "https://paprika-studio.ru/fotogalereya/panaziatskaya-kuhnya-3/",
+    "https://paprika-studio.ru/fotogalereya/hola-vecher-ispanskoj-kuhni-5/",
+    "https://paprika-studio.ru/fotogalereya/gruzinskaya-kuhnya-2/",
+    "https://paprika-studio.ru/fotogalereya/meksikanskaya-kuhnya/",
+    "https://paprika-studio.ru/fotogalereya/sushimaniya-4/",
+    "https://paprika-studio.ru/fotogalereya/kulinarnyiy-kurs-sentyabr/",
+    "https://paprika-studio.ru/fotogalereya/mk-gruzinskaya-kuhnya/",
+    "https://paprika-studio.ru/fotogalereya/detskiy-prazdnik/",
+    "https://paprika-studio.ru/fotogalereya/mk-desertyi-dlya-lyubimyih/",
+]
+
+
+for link in links:
+    print (link)
+    download_by_selector(link, "scripts/files", 10)

@@ -22,16 +22,26 @@ class CoverHrefParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.hrefs: list[str] = []
+        self.cover_src: str | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attrs_dict = dict(attrs)
-        href = attrs_dict.get("href")
         class_attr = attrs_dict.get("class", "")
-        if not href or not class_attr:
+
+        if tag == "a":
+            href = attrs_dict.get("href")
+            if not href or not class_attr:
+                return
+            classes = class_attr.split()
+            if "uk-position-cover" in classes:
+                self.hrefs.append(href.strip())
             return
-        classes = class_attr.split()
-        if "uk-position-cover" in classes:
-            self.hrefs.append(href.strip())
+
+        if tag == "img" and self.cover_src is None:
+            classes = class_attr.split()
+            src = attrs_dict.get("src") or attrs_dict.get("data-src")
+            if src and "wp-post-image" in classes:
+                self.cover_src = src.strip()
 
 
 def sanitize_filename(name: str) -> str:
@@ -94,6 +104,22 @@ def collect_download_links(page_url: str, html: str) -> list[str]:
     return normalized
 
 
+def collect_cover_image_url(page_url: str, html: str) -> str | None:
+    parser = CoverHrefParser()
+    parser.feed(html)
+    if not parser.cover_src:
+        return None
+    return parse.urljoin(page_url, parser.cover_src)
+
+
+def cover_filename(page_url: str, cover_url: str) -> str:
+    page_tail = folder_name_from_page_url(page_url)
+    ext = Path(parse.unquote(parse.urlparse(cover_url).path)).suffix
+    if not ext:
+        ext = ".bin"
+    return f"cover_{page_tail}{ext}"
+
+
 def download_one(url: str, out_path: Path) -> bool:
     try:
         req = request.Request(url, headers={"user-agent": USER_AGENT})
@@ -102,6 +128,49 @@ def download_one(url: str, out_path: Path) -> bool:
         return True
     except Exception:
         return False
+
+
+def download_by_selector(page_url: str, base_dir: str | Path, workers: int) -> None:
+    folder_name = folder_name_from_page_url(page_url)
+    output_dir = Path(base_dir).expanduser().resolve() / folder_name
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    html = fetch_html(page_url)
+    links = collect_download_links(page_url, html)
+    cover_url = collect_cover_image_url(page_url, html)
+
+    total = len(links) + (1 if cover_url else 0)
+    if total == 0:
+        print("No links found for selector .uk-position-cover[href] and no img[class=wp-post-image]")
+        return
+
+    used_names: set[str] = set()
+    targets: list[tuple[str, Path]] = []
+    for idx, link in enumerate(links, start=1):
+        filename = filename_from_url(link, idx)
+        targets.append((link, unique_target(output_dir, filename, used_names)))
+    if cover_url:
+        filename = cover_filename(page_url, cover_url)
+        targets.append((cover_url, unique_target(output_dir, filename, used_names)))
+
+    print(f"Found {total} files. Start download with {workers} workers.")
+
+    done = 0
+    ok = 0
+    failed = 0
+    with ThreadPoolExecutor(max_workers=max(workers, 1)) as pool:
+        futures = [pool.submit(download_one, url, out_path) for url, out_path in targets]
+        for future in as_completed(futures):
+            done += 1
+            if future.result():
+                ok += 1
+            else:
+                failed += 1
+            print(f"\r{done}/{total}", end="", flush=True)
+
+    print()
+    print(f"Done. Success: {ok}, Failed: {failed}, Total: {total}")
+    print(f"Saved to: {output_dir}")
 
 
 def main() -> None:
@@ -122,43 +191,7 @@ def main() -> None:
         help=f"Number of parallel downloads (default: {MAX_WORKERS})",
     )
     args = parser.parse_args()
-
-    folder_name = folder_name_from_page_url(args.url)
-    output_dir = (Path(args.base_dir).expanduser().resolve() / folder_name)
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    html = fetch_html(args.url)
-    links = collect_download_links(args.url, html)
-
-    total = len(links)
-    if total == 0:
-        print("No links found for selector .uk-position-cover[href]")
-        return
-
-    used_names: set[str] = set()
-    targets: list[tuple[str, Path]] = []
-    for idx, link in enumerate(links, start=1):
-        filename = filename_from_url(link, idx)
-        targets.append((link, unique_target(output_dir, filename, used_names)))
-
-    print(f"Found {total} files. Start download with {args.workers} workers.")
-
-    done = 0
-    ok = 0
-    failed = 0
-    with ThreadPoolExecutor(max_workers=max(args.workers, 1)) as pool:
-        futures = [pool.submit(download_one, url, out_path) for url, out_path in targets]
-        for future in as_completed(futures):
-            done += 1
-            if future.result():
-                ok += 1
-            else:
-                failed += 1
-            print(f"\r{done}/{total}", end="", flush=True)
-
-    print()
-    print(f"Done. Success: {ok}, Failed: {failed}, Total: {total}")
-    print(f"Saved to: {output_dir}")
+    download_by_selector(args.url, args.base_dir, args.workers)
 
 
 if __name__ == "__main__":
