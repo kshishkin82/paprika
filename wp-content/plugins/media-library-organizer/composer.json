@@ -1,0 +1,67 @@
+{
+    "name": "codeinwp/media-library-organizer",
+    "description": "Media Library Organizer WordPress Plugin",
+    "type": "project",
+    "license": "GPLv3",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+        "wp-coding-standards/wpcs": "*",
+        "phpstan/phpstan": "^2.1",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "phpunit/phpunit": "^8.5",
+        "yoast/phpunit-polyfills": "^2.0"
+    },
+    "autoload": {
+        "files": [
+            "vendor/codeinwp/themeisle-sdk/load.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "dist": "bash bin/dist.sh",
+        "lint": "phpcs --standard=phpcs.xml",
+        "lint-test": "phpcs ./tests --standard=phpcs.tests.xml",
+        "phpstan": "phpstan",
+        "phpunit": "phpunit"
+    },
+    "archive": {
+        "exclude": [
+            "vendor",
+            "!vendor/codeinwp/*",
+            ".circleci",
+            ".github",
+            "bin",
+            "tests",
+            ".distignore",
+            ".env",
+            ".gitignore",
+            ".git",
+            ".wordpress-org",
+            ".travis.yml",
+            "circle.yml",
+            "codeception.dist.yml",
+            "composer.json",
+            "composer.lock",
+            "Gruntfile.js",
+            "log.txt",
+            "package.json",
+            "package-lock.json",
+            "phpcs.xml.dist",
+            "phpunit.xml",
+            "phpunit.xml.dist",
+            "node_modules",
+            "readme.md",
+            "tags"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require": {
+        "codeinwp/themeisle-sdk": "^3.3"
+    }
+}
