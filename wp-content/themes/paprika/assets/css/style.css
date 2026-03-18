@@ -607,8 +607,8 @@ header a:hover {
 }
 
 .cert-image {
-    background: url("/wp-content/themes/paprika/assets/banner/cert.jpg") center/contain no-repeat;
     min-height: 342px;
+    width: 700px;
     box-shadow: 0px 0px 17px -5px #000000;
 }
 
