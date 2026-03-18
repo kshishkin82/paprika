@@ -606,6 +606,13 @@ header a:hover {
     letter-spacing: 0.02em;
 }
 
+.cert-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .cert-image {
     min-height: 342px;
     width: 700px;

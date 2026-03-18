@@ -173,8 +173,9 @@ require get_theme_file_path('includes/header.php');
     <section id="cert" class="banner">
       <h2 style="font-family: 'Merriweather', serif; font-weight: 300; font-size: 34px; margin: 0;">Подарочный сертификат</h2>
       <p>Лучший подарок - впечатления. Сертификат действует на любой мастер-класс.</p>
-      <img src="/wp-content/themes/paprika/assets/banner/cert.jpg" alt="Подарочный сертификат" class="cert-image" aria-hidden="true">
-      <!-- <div class="cert-image" aria-hidden="true"></div> -->
+      <div class="cert-image-container">
+      <img src="/wp-content/themes/paprika/assets/banner/cert.jpg" alt="Подарочный сертификат" class="cert-image">
+      </div>
       <div class="cta center-block">
         <a class="btn btn-cert" href="/request/?course=Сертификат">Отправить заявку</a>
       </div>
