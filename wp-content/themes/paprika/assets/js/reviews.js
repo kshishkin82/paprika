@@ -29,6 +29,12 @@
 
     cards.forEach((card, index) => {
       card.hidden = !visibleIndices.has(index);
+      card.style.order = "";
+    });
+
+    for (let i = 0; i < visibleCount; i += 1) {
+      const cardIndex = (startIndex + i) % cards.length;
+      cards[cardIndex].style.order = String(i);
     });
   }
 
@@ -38,11 +44,11 @@
   }
 
   prevButton.addEventListener("click", function () {
-    move(-1);
+    move(-getVisibleCount());
   });
 
   nextButton.addEventListener("click", function () {
-    move(1);
+    move(getVisibleCount());
   });
 
   if (typeof mobileQuery.addEventListener === "function") {
