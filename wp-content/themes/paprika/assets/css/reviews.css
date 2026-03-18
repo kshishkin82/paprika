@@ -65,6 +65,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  fill: #fff;
 }
 
 .reviews-slider__nav:hover {
