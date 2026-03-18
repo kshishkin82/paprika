@@ -16,6 +16,16 @@ require get_theme_file_path('includes/header.php');
           width: fit-content;
           margin-top:4px;
           }
+
+        @media (max-width: 640px) {
+          .center-header {
+            flex-wrap: wrap;
+          }
+
+          .center-header .request-link {
+            width: 100%;
+          }
+        }
     </style>
     <main class="page-content">
       <?php
@@ -40,7 +50,7 @@ require get_theme_file_path('includes/header.php');
             ?>
             <a class="request-link" href="/request/?course=<?=get_the_title().$nearest_date ?>">Записаться</a>
             <?php } ?>
-        </div>
+          </div>
         <?php
 
         the_content();
