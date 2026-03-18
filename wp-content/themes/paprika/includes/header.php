@@ -24,13 +24,5 @@ declare(strict_types=1);
       <div class="header-banner__side header-banner__side--right"></div>
     </div>
     <nav class="nav header-banner__nav">
-      <?php
-      wp_nav_menu([
-        'theme_location' => 'main-menu',
-        'container' => false,
-        'items_wrap' => '%3$s',
-        'walker' => new Paprika_Link_Only_Walker(),
-        'fallback_cb' => false,
-      ]);
-      ?>
+      <?php paprika_render_main_menu(); ?>
     </nav>

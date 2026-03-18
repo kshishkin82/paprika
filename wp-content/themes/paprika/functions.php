@@ -167,6 +167,87 @@ function paprika_mark_active_main_menu_objects(array $items, stdClass $args): ar
 }
 add_filter('wp_nav_menu_objects', 'paprika_mark_active_main_menu_objects', 10, 2);
 
+function paprika_get_main_menu_items(): array {
+  $locations = get_nav_menu_locations();
+  $menu_id = isset($locations['main-menu']) ? (int) $locations['main-menu'] : 0;
+  if ($menu_id <= 0) {
+    return [];
+  }
+
+  $items = wp_get_nav_menu_items($menu_id);
+  if (!is_array($items)) {
+    return [];
+  }
+
+  usort($items, static function ($a, $b): int {
+    $a_order = isset($a->menu_order) ? (int) $a->menu_order : 0;
+    $b_order = isset($b->menu_order) ? (int) $b->menu_order : 0;
+    return $a_order <=> $b_order;
+  });
+
+  return $items;
+}
+
+function paprika_render_main_menu_link(WP_Post $item): void {
+  $classes = paprika_mark_active_main_menu_items((array) $item->classes, $item);
+  $classes = array_values(array_filter($classes, 'is_string'));
+  $class_attr = $classes ? ' class="' . esc_attr(implode(' ', $classes)) . '"' : '';
+
+  $atts = '';
+  if (!empty($item->url)) {
+    $atts .= ' href="' . esc_url($item->url) . '"';
+  }
+  if (!empty($item->target)) {
+    $atts .= ' target="' . esc_attr($item->target) . '"';
+  }
+  if (!empty($item->xfn)) {
+    $atts .= ' rel="' . esc_attr($item->xfn) . '"';
+  }
+  if (!empty($item->title)) {
+    $atts .= ' title="' . esc_attr($item->title) . '"';
+  }
+
+  $title = apply_filters('the_title', $item->title, $item->ID);
+  echo '<a' . $class_attr . $atts . '>' . esc_html((string) $title) . '</a>';
+}
+
+function paprika_render_main_menu(): void {
+  $items = paprika_get_main_menu_items();
+  if ($items === []) {
+    return;
+  }
+
+  $left_items = [];
+  $right_items = [];
+
+  foreach ($items as $item) {
+    if (!$item instanceof WP_Post) {
+      continue;
+    }
+
+    $classes = array_values(array_filter((array) $item->classes, 'is_string'));
+    $is_cta = in_array('nav-cta', $classes, true);
+    if ($is_cta) {
+      $right_items[] = $item;
+      continue;
+    }
+
+    $left_items[] = $item;
+  }
+  ?>
+  <div class="nav__left">
+    <?php foreach ($left_items as $item) {
+      paprika_render_main_menu_link($item);
+    } ?>
+  </div>
+  <div class="nav__right">
+    <?php foreach ($right_items as $item) {
+      paprika_render_main_menu_link($item);
+    } ?>
+  </div>
+  <?php
+}
+
 final class Paprika_Link_Only_Walker extends Walker_Nav_Menu {
   public function start_lvl(&$output, $depth = 0, $args = null): void {
   }
