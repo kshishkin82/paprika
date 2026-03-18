@@ -132,6 +132,14 @@ function paprika_mark_active_main_menu_items(array $classes, WP_Post $menu_item)
   $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
   $current_path = (string) wp_parse_url($request_uri, PHP_URL_PATH);
   $current_path = trailingslashit($current_path);
+  $is_exact_match = $item_path !== '' && $item_path === $current_path;
+  $is_gallery_or_schedule_branch = $item_path !== '' && ($item_path === '/fotogalereya/' || $item_path === '/raspisanie/') && str_contains($current_path, $item_path);
+
+  if ($is_exact_match || $is_gallery_or_schedule_branch) {
+    $classes[] = 'current-menu-item';
+    $classes[] = 'current_page_item';
+  }
+
   $is_gallery_item = str_contains($item_path, 'fotogalereya/');
   $is_schedule_item = str_contains($item_path, 'raspisanie/');
   $is_gallery_current = str_contains($current_path, 'fotogalereya/');
