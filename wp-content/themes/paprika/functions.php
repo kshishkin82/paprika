@@ -23,6 +23,15 @@ function paprika_enqueue_assets(): void {
     filemtime(get_theme_file_path('assets/css/style.css'))
   );
 
+  if (is_front_page()) {
+    wp_enqueue_style(
+      'paprika-reviews',
+      get_theme_file_uri('assets/css/reviews.css'),
+      ['paprika-style'],
+      filemtime(get_theme_file_path('assets/css/reviews.css'))
+    );
+  }
+
   wp_enqueue_script(
     'paprika-gallery',
     get_theme_file_uri('assets/js/gallery.js'),
@@ -30,6 +39,16 @@ function paprika_enqueue_assets(): void {
     filemtime(get_theme_file_path('assets/js/gallery.js')),
     true
   );
+
+  if (is_front_page()) {
+    wp_enqueue_script(
+      'paprika-reviews',
+      get_theme_file_uri('assets/js/reviews.js'),
+      [],
+      filemtime(get_theme_file_path('assets/js/reviews.js')),
+      true
+    );
+  }
 
   if (is_page('request')) {
     wp_enqueue_script(

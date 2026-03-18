@@ -88,6 +88,72 @@ require get_theme_file_path('includes/header.php');
       </div>
     </section>
 
+    <section class="reviews-section" id="reviews">
+      <div class="reviews-section__head">
+        <h2>Отзывы гостей</h2>
+        <p>Коротко о том, как проходят мастер-классы в Paprika Studio.</p>
+      </div>
+
+      <div class="reviews-slider js-reviews-slider">
+        <button class="reviews-slider__nav reviews-slider__nav--prev" type="button" aria-label="Предыдущие отзывы">←</button>
+        <div class="reviews-slider__viewport">
+          <div class="reviews-slider__track">
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=5" alt="Алина" loading="lazy" />
+              <h3 class="review-card__name">Алина Ш.</h3>
+              <p class="review-card__text">Очень уютная атмосфера и понятная подача. За один вечер приготовили 3 блюда и сразу повторили дома.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=12" alt="Михаил" loading="lazy" />
+              <h3 class="review-card__name">Михаил К.</h3>
+              <p class="review-card__text">Пришли компанией на корпоратив. Все вовлечены, много практики, и в итоге реально вкусный ужин.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=20" alt="Екатерина" loading="lazy" />
+              <h3 class="review-card__name">Екатерина Л.</h3>
+              <p class="review-card__text">Понравилось, что шеф объясняет без сложных терминов. Наконец-то разобралась с соусами и временем жарки.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=28" alt="Игорь" loading="lazy" />
+              <h3 class="review-card__name">Игорь П.</h3>
+              <p class="review-card__text">Ходил на мастер-класс по итальянской кухне. Отличная организация и классные продукты, все на уровне.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=33" alt="Марина" loading="lazy" />
+              <h3 class="review-card__name">Марина В.</h3>
+              <p class="review-card__text">Брала сертификат в подарок, потом пришли вдвоем. Время пролетело незаметно, получили море эмоций.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=41" alt="Олег" loading="lazy" />
+              <h3 class="review-card__name">Олег Д.</h3>
+              <p class="review-card__text">Хороший формат для новичков: все инструменты есть, рецепт четкий, и шеф всегда рядом, если нужна помощь.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=47" alt="Светлана" loading="lazy" />
+              <h3 class="review-card__name">Светлана М.</h3>
+              <p class="review-card__text">Очень понравилась подача и детали сервировки. Даже дети были в восторге от семейного мастер-класса.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=51" alt="Антон" loading="lazy" />
+              <h3 class="review-card__name">Антон Р.</h3>
+              <p class="review-card__text">Было динамично и без пауз. Отличный баланс между теорией и практикой, плюс дружелюбная команда.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=58" alt="Юлия" loading="lazy" />
+              <h3 class="review-card__name">Юлия Т.</h3>
+              <p class="review-card__text">Удобно, что можно выбрать программу под уровень. После занятия перестала бояться сложных блюд.</p>
+            </article>
+            <article class="review-card">
+              <img class="review-card__avatar" src="https://i.pravatar.cc/160?img=65" alt="Роман" loading="lazy" />
+              <h3 class="review-card__name">Роман Н.</h3>
+              <p class="review-card__text">Лучшая идея для свидания: вкусно, интересно и с результатом. Обязательно вернемся на новый курс.</p>
+            </article>
+          </div>
+        </div>
+        <button class="reviews-slider__nav reviews-slider__nav--next" type="button" aria-label="Следующие отзывы">→</button>
+      </div>
+    </section>
+
     <section id="cert" class="banner">
       <h2 style="font-family: 'Merriweather', serif; font-weight: 300; font-size: 34px; margin: 0;">Подарочный сертификат</h2>
       <p>Лучший подарок - впечатления. Сертификат действует на любой мастер-класс.</p>
