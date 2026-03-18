@@ -220,6 +220,15 @@ header a:hover {
     border-color: rgba(255, 255, 255, 0.18);
 }
 
+.nav a.current-menu-item,
+.nav a.current_page_item,
+.nav a.current-menu-ancestor,
+.nav a.current-menu-parent {
+    background: rgba(var(--hot-rgb), 0.95);
+    border-color: rgba(var(--hot-rgb), 1);
+    color: #fff;
+}
+
 .nav .nav-cta {
     padding: 0 16px;
     border-radius: 999px;

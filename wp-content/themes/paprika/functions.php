@@ -50,6 +50,102 @@ function paprika_register_menus(): void {
 }
 add_action('after_setup_theme', 'paprika_register_menus');
 
+function paprika_get_post_internal_path(WP_Post $post): string {
+  if (has_category('Галерея', $post)) {
+    return '/fotogalereya/' . $post->post_name . '/';
+  }
+
+  if (has_category('Мастер класс', $post)) {
+    return '/raspisanie/' . $post->post_name . '/';
+  }
+
+  return '';
+}
+
+function paprika_filter_post_permalink(string $permalink, WP_Post $post): string {
+  $internal_path = paprika_get_post_internal_path($post);
+  if ($internal_path !== '') {
+    return home_url($internal_path);
+  }
+
+  return $permalink;
+}
+add_filter('post_link', 'paprika_filter_post_permalink', 10, 2);
+
+function paprika_register_internal_post_rewrites(): void {
+  add_rewrite_rule('^fotogalereya/([^/]+)/?$', 'index.php?paprika_gallery_post=$matches[1]', 'top');
+  add_rewrite_rule('^raspisanie/([^/]+)/?$', 'index.php?paprika_schedule_post=$matches[1]', 'top');
+}
+add_action('init', 'paprika_register_internal_post_rewrites');
+
+function paprika_register_internal_query_vars(array $vars): array {
+  $vars[] = 'paprika_gallery_post';
+  $vars[] = 'paprika_schedule_post';
+  return $vars;
+}
+add_filter('query_vars', 'paprika_register_internal_query_vars');
+
+function paprika_map_internal_post_request(array $query_vars): array {
+  $gallery_slug = isset($query_vars['paprika_gallery_post']) ? sanitize_title((string) $query_vars['paprika_gallery_post']) : '';
+  if ($gallery_slug !== '') {
+    $query_vars['name'] = $gallery_slug;
+    $query_vars['post_type'] = 'post';
+    unset($query_vars['paprika_gallery_post']);
+  }
+
+  $schedule_slug = isset($query_vars['paprika_schedule_post']) ? sanitize_title((string) $query_vars['paprika_schedule_post']) : '';
+  if ($schedule_slug !== '') {
+    $query_vars['name'] = $schedule_slug;
+    $query_vars['post_type'] = 'post';
+    unset($query_vars['paprika_schedule_post']);
+  }
+
+  return $query_vars;
+}
+add_filter('request', 'paprika_map_internal_post_request');
+
+function paprika_maybe_flush_rewrite_rules(): void {
+  $rules_version = 1;
+  $stored_version = (int) get_option('paprika_rewrite_rules_version', 0);
+
+  if ($stored_version === $rules_version) {
+    return;
+  }
+
+  paprika_register_internal_post_rewrites();
+  flush_rewrite_rules(false);
+  update_option('paprika_rewrite_rules_version', $rules_version);
+}
+add_action('init', 'paprika_maybe_flush_rewrite_rules', 20);
+
+function paprika_is_gallery_context(): bool {
+  return is_page('fotogalereya') || (is_single() && in_category('Галерея'));
+}
+
+function paprika_is_schedule_context(): bool {
+  return is_home() || is_page('raspisanie') || (is_single() && in_category('Мастер класс'));
+}
+
+function paprika_mark_active_main_menu_items(array $classes, WP_Post $menu_item): array {
+  $item_path = wp_parse_url((string) $menu_item->url, PHP_URL_PATH);
+  $item_path = is_string($item_path) ? trailingslashit($item_path) : '';
+  $is_gallery_item = (bool) preg_match('#/fotogalereya/$#', $item_path);
+  $is_schedule_item = (bool) preg_match('#/raspisanie/$#', $item_path);
+
+  if ($is_gallery_item && paprika_is_gallery_context()) {
+    $classes[] = 'current-menu-item';
+    $classes[] = 'current_page_item';
+  }
+
+  if ($is_schedule_item && paprika_is_schedule_context()) {
+    $classes[] = 'current-menu-item';
+    $classes[] = 'current_page_item';
+  }
+
+  return array_values(array_unique($classes));
+}
+add_filter('nav_menu_css_class', 'paprika_mark_active_main_menu_items', 10, 2);
+
 final class Paprika_Link_Only_Walker extends Walker_Nav_Menu {
   public function start_lvl(&$output, $depth = 0, $args = null): void {
   }
