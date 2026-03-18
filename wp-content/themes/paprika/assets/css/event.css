@@ -50,6 +50,7 @@
 @media (max-width: 640px) {
   .master-class-card {
     flex-direction: column;
+    row-gap: 16px;
   }
 
   .master-class-card .hero-image img {
