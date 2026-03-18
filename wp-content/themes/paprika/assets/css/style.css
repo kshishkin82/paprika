@@ -185,6 +185,8 @@ header a:hover {
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid #73777387;
+    padding-bottom: 26px;
 }
 
 .nav ul {
@@ -224,13 +226,8 @@ header a:hover {
 .nav a.current_page_item,
 .nav a.current-menu-ancestor,
 .nav a.current-menu-parent {
-    
-    border: 1px solid rgb(211 51 44 / 43%);
     color: #fff;
-    background-size: 100% 100%;
-    background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-    background-image: radial-gradient(113% 91% at 17% -2%, #D7342C 1%, #FF000000 99%), radial-gradient(142% 91% at 111% 84%, #000000FF 0%, #000000FF 100%);
-    background-repeat: no-repeat;
+    background-color: #48494a;
 }
 
 .nav .nav-cta {
