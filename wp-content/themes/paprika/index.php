@@ -24,6 +24,12 @@ require get_theme_file_path('includes/header.php');
 
           .center-header .request-link {
             width: 100%;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+          }
+
+          .center-header .request-link::after {
+            font-size: 20px;
           }
         }
     </style>
