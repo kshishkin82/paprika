@@ -28,7 +28,7 @@
     }
 
     cards.forEach((card, index) => {
-      card.hidden = !visibleIndices.has(index);
+      card.classList.toggle("is-hidden", !visibleIndices.has(index));
       card.style.order = "";
     });
 
@@ -57,5 +57,6 @@
     mobileQuery.addListener(render);
   }
 
+  slider.classList.add("is-ready");
   render();
 })();
