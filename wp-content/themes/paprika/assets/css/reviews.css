@@ -22,7 +22,7 @@
 .reviews-slider {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  align-items: center;
+  align-items: start;
   gap: 12px;
 }
 
@@ -86,7 +86,7 @@
 
 .review-card__avatar {
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 1 / 3;
   width: 72px;
   height: 72px;
   border-radius: 50%;
@@ -103,9 +103,19 @@
   overflow: hidden;
 }
 
+.review-card__date {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.68);
+}
+
 .review-card__text {
   grid-column: 1 / -1;
-  grid-row: 2;
+  grid-row: 3;
   margin: 0;
   color: rgba(255, 255, 255, 0.84);
   line-height: 1.6;
