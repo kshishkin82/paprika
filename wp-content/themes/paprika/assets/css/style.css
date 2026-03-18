@@ -606,7 +606,7 @@ header a:hover {
 }
 
 .cert-image {
-    background: url("https://paprika-studio.ru/wp-content/uploads/cert.png") center/contain no-repeat;
+    background: url("/wp-content/themes/paprika/assets/banner/cert.jpg") center/contain no-repeat;
     min-height: 370px;
 }
 
