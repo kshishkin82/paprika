@@ -12,10 +12,10 @@ transform:
     rotateX(27deg)
     rotateY(-16deg)
     scale(0.9, 0.9);
-  border-radius: 20px;
+
   box-shadow: 0 70px 40px -20px rgba(0, 0, 0, 0.2);
   transition: 0.3s ease-in-out transform;
-  max-width: 80%;
+  max-width: 800px;
 }
 
 .page-content .prefer-image img:hover {
