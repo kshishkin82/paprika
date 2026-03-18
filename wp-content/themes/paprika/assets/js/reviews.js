@@ -35,7 +35,7 @@
     for (let i = 0; i < visibleCount; i += 1) {
       const cardIndex = (startIndex + i) % cards.length;
       cards[cardIndex].style.order = String(i);
-    });
+    }
   }
 
   function move(step) {
