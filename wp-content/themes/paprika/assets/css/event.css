@@ -51,4 +51,8 @@
   .master-class-card {
     flex-direction: column;
   }
+
+  .master-class-card .hero-image img {
+    max-width: none;
+  }
 }
