@@ -16,6 +16,8 @@ require get_theme_file_path('includes/header.php');
         'post_status' => 'publish',
         'posts_per_page' => -1,
         'ignore_sticky_posts' => true,
+        'orderby' => 'date',
+        'order'   => 'DESC',
       ]);
 
     while ($posts_query->have_posts()) {
