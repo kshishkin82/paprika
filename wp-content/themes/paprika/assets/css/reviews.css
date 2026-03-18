@@ -81,7 +81,6 @@
   align-items: center;
   column-gap: 12px;
   row-gap: 10px;
-  min-height: 260px;
 }
 
 .review-card__avatar {
@@ -100,6 +99,7 @@
   margin: 0;
   font-size: 20px;
   line-height: 1.2;
+  overflow: hidden;
 }
 
 .review-card__text {
@@ -110,13 +110,32 @@
   line-height: 1.6;
 }
 
-@media (max-width: 980px) {
-  .review-card {
-    min-height: 0;
-  }
-}
-
 @media (max-width: 640px) {
+  .front-page-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .front-page-content .hero {
+    order: 1;
+  }
+
+  .front-page-content .reviews-section {
+    order: 2;
+  }
+
+  .front-page-content #formats {
+    order: 3;
+  }
+
+  .front-page-content #gallery {
+    order: 4;
+  }
+
+  .front-page-content #cert {
+    order: 5;
+  }
+
   .reviews-slider {
     grid-template-columns: auto 1fr auto;
     gap: 8px;

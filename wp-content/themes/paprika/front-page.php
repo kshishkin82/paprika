@@ -5,6 +5,7 @@ declare(strict_types=1);
 require get_theme_file_path('includes/header.php');
 ?>
 
+    <main class="front-page-content">
     <section class="hero">
       <div>
         <?php the_content() ?>
@@ -163,5 +164,6 @@ require get_theme_file_path('includes/header.php');
       </div>
       <p class="banner-call">или позвоните по номеру:<br><a class="banner-phone" href="tel:491829">49-18-29</a></p>
     </section>
+    </main>
 
 <?php require get_theme_file_path('includes/footer.php'); ?>
