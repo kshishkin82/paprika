@@ -10,7 +10,7 @@ require get_theme_file_path('includes/header.php');
 
 <section class="event-grid" style="padding-top:20px">
   <?php
-  // if (have_posts()) {
+  
     $category = get_term_by('name', 'Мастер класс', 'category');
     $posts_query = new WP_Query([
         'cat' => (int) $category->term_id,
@@ -18,6 +18,9 @@ require get_theme_file_path('includes/header.php');
         'post_status' => 'publish',
         'posts_per_page' => -1,
         'ignore_sticky_posts' => true,
+        'meta_key'            => 'order_number',
+        'orderby'             => 'meta_value_num', // WP сам сделает CAST к числу
+        'order'               => 'ASC',
       ]);
 
     while ($posts_query->have_posts()) {

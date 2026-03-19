@@ -6,20 +6,27 @@
 
 
 .page-content .prefer-image img {
-transform:
-    perspective(750px)
-    translate3d(0px, 0px, -250px)
-    rotateX(27deg)
-    rotateY(-16deg)
-    scale(0.9, 0.9);
+    transform: scale(0.8, 0.8);
+    margin-top: 10px;
+    transition: 0.3s ease-in-out transform;
+    max-width: 100%;
+}
 
-  box-shadow: 0 70px 40px -20px rgba(0, 0, 0, 0.2);
-  transition: 0.3s ease-in-out transform;
-  max-width: 100%;
+.page-content p {
+    line-height: 1.6em;
+}
+
+.card p {
+    line-height: 1.6em;
+}
+
+.red_link {
+    border-bottom:1px solid var(--hot) ;
 }
 
 .page-content .prefer-image img:hover {
-transform: translate3d(0px, 0px, -250px);
+    transform: scale(1, 1);
+    /* box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.3); */
 }
 
 .page-content a {
@@ -203,6 +210,10 @@ header a:hover {
     margin-left: auto;
 }
 
+.nav__right svg {
+    fill: white
+}
+
 .nav ul {
     list-style: none;
     margin: 0;
@@ -299,7 +310,7 @@ header a:hover {
     z-index: 0;
 }
 
-.hero > * {
+.hero>* {
     position: relative;
     z-index: 1;
 }
@@ -495,7 +506,7 @@ header a:hover {
     z-index: 0;
 }
 
-.card.ornament > * {
+.card.ornament>* {
     position: relative;
     z-index: 1;
 }
@@ -533,29 +544,6 @@ header a:hover {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.55));
 }
 
-.grid .tile.photo-1 {
-    background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/Uzhin-gurmana-e1736949694958-ca1e53226a593a739a66d5b5104cbc06.jpg");
-}
-
-.grid .tile.photo-2 {
-    background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/palermo-e1732105472722-ee3dec5d3adf0cd58ffa6d52e6e3edf4.jpg");
-}
-
-.grid .tile.photo-3 {
-    background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/photo_2024-12-05_14-48-57-55f6ecb1a8bb98df1f23a4fd5206cb53.jpg");
-}
-
-.grid .tile.photo-4 {
-    background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/Liguriya-7ac63fceedcd5cf75d6989c93b56535d.jpg");
-}
-
-.grid .tile.photo-5 {
-    background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/15021426495988e0b9350dc8.21593861-436dffa77fdff0885275a423fb08a7d7.jpg");
-}
-
-.grid .tile.photo-6 {
-    background-image: url("https://paprika-studio.ru/wp-content/plugins/widgetkit/cache/1-b077136b3511a21ec18bf1df99721e05.png");
-}
 
 .banner {
     background: linear-gradient(135deg, rgba(var(--hot-rgb), 1), rgba(var(--hot-rgb), 0.78));
@@ -581,7 +569,7 @@ header a:hover {
     z-index: 0;
 }
 
-.banner > * {
+.banner>* {
     position: relative;
     z-index: 1;
 }
@@ -615,7 +603,7 @@ header a:hover {
 }
 
 .cert-image {
-    max-width: 700px;
+    max-width: 1000px;
     width: 100%;
     box-shadow: 0px 0px 17px -5px #000000;
 }
@@ -705,6 +693,40 @@ footer {
     justify-items: start;
 }
 
+.contacts-block {
+    background: #fff;
+    color: black;
+    padding: 20px;
+}
+
+.contacts-block p {
+    line-height:1.5em;
+}
+
+.contacts-block h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    font-family: "Merriweather", serif;
+    display: inline-block;
+    border-bottom: 1px solid var(--hot);
+}
+
+.contacts-block .f svg {
+    fill: var(--hot);
+}
+
+.contacts-block .s svg {
+    fill: none;
+    stroke: var(--hot);
+}
+
+.contacts-block .l {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 @media (min-width: 981px) {
     .wrap::before {
         height: 225px;
@@ -725,7 +747,9 @@ footer {
 }
 
 @media (max-width: 980px) {
-    .hero, .section {
+
+    .hero,
+    .section {
         grid-template-columns: 1fr;
     }
 
@@ -747,6 +771,7 @@ footer {
 }
 
 @media (max-width: 640px) {
+
     .hero::before,
     .hero::after,
     .card.ornament::after,
@@ -864,5 +889,10 @@ footer {
     .banner-call {
         font-size: 17px;
         font-weight: 600;
+    }
+
+    .contacts-block {
+        width: 100%;
+        margin-bottom: 20px;
     }
 }

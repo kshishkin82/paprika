@@ -66,6 +66,9 @@ function paprika_register_menus(): void {
   register_nav_menus([
     'main-menu' => 'Main Menu',
   ]);
+  register_nav_menus([
+    'footer-menu' => 'Footer Menu',
+  ]);
 }
 add_action('after_setup_theme', 'paprika_register_menus');
 
@@ -268,6 +271,9 @@ function paprika_render_main_menu(): void {
     } ?>
   </div>
   <div class="nav__right">
+    <!-- <div class="contacts"> -->
+      <!-- <svg  xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 16 16" xml:space="preserve"><path d="M14.2 16C6.4 16 0 9.6 0 1.8 0 .8.8 0 1.8 0h2.7c1 0 1.8.8 1.8 1.8 0 .8.1 1.7.4 2.5.2.6 0 1.3-.4 1.8L5.1 7.3C6 8.8 7.3 10.1 8.8 11L10 9.8c.5-.5 1.2-.6 1.8-.4.8.3 1.6.4 2.5.4 1 0 1.8.8 1.8 1.8v2.7c-.1.9-.9 1.7-1.9 1.7M1.8 1c-.5 0-.8.3-.8.8C1 9.1 6.9 15 14.2 15c.4 0 .8-.3.8-.8v-2.7c0-.4-.3-.8-.8-.8-1 0-1.9-.1-2.8-.4-.3-.1-.6 0-.8.2l-1.7 1.7-.3-.2c-2-1.1-3.5-2.7-4.6-4.6l-.2-.3 1.7-1.7c.2-.2.3-.5.2-.8-.3-.9-.4-1.9-.4-2.8 0-.5-.4-.8-.8-.8z"/></svg> -->
+    <!-- </div> -->
     <?php foreach ($right_items as $item) {
       paprika_render_main_menu_link($item);
     } ?>
@@ -316,10 +322,33 @@ function paprika_customize_register(WP_Customize_Manager $wp_customize): void {
 
   $wp_customize->add_setting('paprika_phones', [
     'default' => '8 (937) 530-10-90, 8 (927) 510-08-53',
+    'sanitize_callback' => 'wp_kses_post',
+  ]);
+  
+  $wp_customize->add_setting('paprika_address', [
+    'default' => 'Волгоград, проспект им. В.И. Ленина 110, 2 этаж<br />Здание заводоуправления «Красный Октябрь»',
+    'sanitize_callback' => 'wp_kses_post',
+  ]);
+
+  $wp_customize->add_setting('paprika_email', [
+    'default' => 'vm.83@mail.ru',
     'sanitize_callback' => 'sanitize_text_field',
   ]);
+
   $wp_customize->add_control('paprika_phones', [
     'label' => 'Телефоны',
+    'section' => 'paprika_contacts',
+    'type' => 'textarea',
+  ]);
+
+  $wp_customize->add_control('paprika_address', [
+    'label' => 'Адрес',
+    'section' => 'paprika_contacts',
+    'type' => 'textarea',
+  ]);
+
+    $wp_customize->add_control('paprika_email', [
+    'label' => 'Почта',
     'section' => 'paprika_contacts',
     'type' => 'text',
   ]);
@@ -495,3 +524,96 @@ function paprika_handle_request_form_submit(): void {
 }
 add_action('admin_post_nopriv_paprika_request_submit', 'paprika_handle_request_form_submit');
 add_action('admin_post_paprika_request_submit', 'paprika_handle_request_form_submit');
+
+
+// 1. Добавляем колонку в таблицу
+add_filter('manage_posts_columns', 'add_post_order_column');
+function add_post_order_column($columns) {
+    $columns['order_column_id'] = 'Позиция'; // Короткое название, чтобы не растягивать таблицу
+    return $columns;
+}
+
+// 2. Делаем колонку сортируемой
+add_filter('manage_edit-post_sortable_columns', 'my_register_sortable_column');
+function my_register_sortable_column($columns) {    
+    // Ключ 'order_number' — это то, что пойдет в URL ?orderby=order_number
+    $columns['order_column_id'] = 'order_number'; 
+    return $columns;
+}
+
+// 3. Выводим значение в таблице
+add_action('manage_posts_custom_column', 'fill_custom_post_column', 10, 2);
+function fill_custom_post_column($column, $post_id) {
+    if ($column === 'order_column_id') {
+        // ВАЖНО: используем просто 'order_number', как в настройках Pods
+        $meta_value = get_post_meta($post_id, 'order_number', true);
+        echo ($meta_value !== '') ? esc_html($meta_value) : '—';
+    }
+}
+
+// 4. Добавляем поле в "Свойства" (Quick Edit)
+add_action('quick_edit_custom_box', 'display_custom_quick_edit', 10, 2);
+function display_custom_quick_edit($column_name, $post_type) {
+    if ($column_name !== 'order_column_id') return; 
+
+    echo '
+    <fieldset class="inline-edit-col-right">
+      <div class="inline-edit-col">
+        <label>
+          <span class="title">Порядок</span>          
+          <input type="number" name="order_number" class="ptitle" value="">        
+        </label>
+      </div>
+    </fieldset>';
+}
+
+// 5. JS для подтягивания данных в Quick Edit
+add_action('admin_footer', 'quick_edit_javascript');
+function quick_edit_javascript() {
+    // Выполняем скрипт только на страницах списка записей
+    $screen = get_current_screen();
+    if ( $screen->base !== 'edit' ) return;
+    ?>
+    <script type="text/javascript">
+    jQuery(function($) {
+        const $wp_inline_edit = inlineEditPost.edit;
+        inlineEditPost.edit = function(id) {
+            $wp_inline_edit.apply(this, arguments);
+            
+            const post_id = typeof(id) === 'object' ? parseInt($(id).closest('tr').attr('id').replace('post-', '')) : id;
+            if (post_id > 0) {
+                const $edit_row = $('#edit-' + post_id);
+                const $post_row = $('#post-' + post_id);
+                
+                // Берем число из колонки и ставим в input
+                const val = $post_row.find('.column-order_column_id').text();
+                $edit_row.find('input[name="order_number"]').val(val === '—' ? '' : val);
+            }
+        };
+    });
+    </script>
+    <?php
+}
+
+// 6. Сохранение данных
+add_action('save_post', 'save_quick_edit_data');
+function save_quick_edit_data($post_id) {
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['order_number'])) {
+        // Сохраняем в мета-поле order_number (которое использует Pods)
+        update_post_meta($post_id, 'order_number', sanitize_text_field($_POST['order_number']));
+    }
+}
+
+// 7. Обработка самой сортировки (чтобы при клике на заголовок менялся порядок)
+add_action('pre_get_posts', 'my_apply_order_column_sort');
+function my_apply_order_column_sort($query) {
+    if (!is_admin() || !$query->is_main_query()) return;
+
+    if ($query->get('orderby') === 'order_number') {
+        $query->set('meta_key', 'order_number');
+        $query->set('orderby', 'meta_value_num');
+    }
+}

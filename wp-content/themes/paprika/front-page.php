@@ -19,13 +19,14 @@ require get_theme_file_path('includes/header.php');
           $params = array(
               'where'   => 'showindex.meta_value = 1',
               'limit'   => 3,
-              'orderby' => 'post_date DESC'
+              'orderby' => 'CAST(order_number.meta_value AS SIGNED) ASC' 
           );
           $mypods = pods( 'post', $params );
           while ( $mypods->fetch() ) {
           $link  = get_permalink( $mypods->id() );
           ?>
-            <a class="block" style="background-image:url(<?=$mypods->display('heroimage._src.medium_large') ?>)" href="<?=$link ?>">
+
+            <a class="block" style="background-image:url(<?=$mypods->display('heroimage._src.medium_large') ?>)" href="<?=$link ?>">                
                 <span class="title"><?=$mypods->display( 'post_title' ) ?></span>
                 <span class="date"><?=$mypods->display('nearest_date') ?></span>
             </a>
@@ -177,7 +178,7 @@ require get_theme_file_path('includes/header.php');
       <img src="/wp-content/themes/paprika/assets/banner/cert.jpg" alt="Подарочный сертификат" class="cert-image">
       </div>
       <div class="cta center-block">
-        <a class="btn btn-cert" href="/request/?course=Сертификат">Отправить заявку</a>
+        <a class="btn btn-cert" href="/request/?course=Сертификат">Заказать сертификат</a>
       </div>
       <p class="banner-call">или позвоните по номеру:<br><a class="banner-phone" href="tel:491829">49-18-29</a></p>
     </section>
